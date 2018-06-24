@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public class CallableController {
     @RequestMapping("/test")
     public String test(HttpServletRequest request) {
 
-
+        long beginTime = System.currentTimeMillis();
 
         // 访问网站
         List<String> requestUrlList = new ArrayList<>();
@@ -37,6 +39,8 @@ public class CallableController {
 
         // 异步获取数据
         List<String> resultData = callableService.getCallableData(requestUrlList);
+
+        System.out.println("总用时 ------- " + (System.currentTimeMillis() - beginTime) + " ms");
 
         return JSON.toJSONString(resultData);
     }

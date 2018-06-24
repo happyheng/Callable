@@ -33,6 +33,14 @@ public class RequestCallable implements Callable<String>{
             return null;
         }
 
-        return HttpUtils.get(requestUrl);
+        long beginTime = System.currentTimeMillis();
+
+        // 开始http请求
+        String result = HttpUtils.get(requestUrl);
+
+        System.out.println("callable url: " + requestUrl + " 用时 --------"
+                + (System.currentTimeMillis() - beginTime) + " ms");
+
+        return result;
     }
 }
